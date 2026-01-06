@@ -17,6 +17,8 @@ public record Settings() {
 
         static int AABB_FATTENING = 50;
 
+        static Point2d INITIAL_VECTOR = new Point2d(1, 0);
+
     }
 
 }

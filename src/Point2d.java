@@ -35,4 +35,24 @@ public class Point2d {
         return this;
     }
 
+
+    public static Point2d add(Point2d p1, Point2d p2){
+        return new Point2d(p1.getX() + p2.getX(), p1.getY() + p2.getY());
+    }
+
+    public static Point2d multiply(Point2d p1, double multiplier){
+        return new Point2d(p1.getX() * multiplier, p1.getY() * multiplier);
+    }
+
+    public static double dotProduct(Point2d point1, Point2d point2){
+        return (point1.getX() * point2.getX()) + (point1.getY() * point2.getY());
+    }
+
+    public static Point2d tripleProduct2d(Point2d p1, Point2d p2, Point2d p3){
+        return new Vector2d(multiply(p2, dotProduct(p1, p3)).translate(multiply(p3, -dotProduct(p1, p2))));
+    }
+
+    public static boolean sameDirection(Point2d d, Point2d target){
+        return Point2d.dotProduct(d, target) > 0;
+    }
 }

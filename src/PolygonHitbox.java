@@ -21,9 +21,9 @@ public class PolygonHitbox extends Hitbox {
     //@Override
     //public AABB getBoundingBox() { return boundingBox; }
 
-    private Point2d location;
-    @Override
-    public Point2d getLocation() { return location; }
+    //private Point2d location;
+    //@Override
+    //public Point2d getLocation() { return location; }
 
     private int[][] intVertices;
     public int[][] getIntVertices(){
@@ -74,9 +74,29 @@ public class PolygonHitbox extends Hitbox {
     }
 
     public void translate(Vector2d translation){
-        location.translate(translation);
+        //location.translate(translation);
         //boundingBox.translate(translation);
         updateVector.translate(translation);
     }
 
+    @Override
+    public Point2d GJKSupportFunction(Point2d d) {
+
+        int vertexID = 0;
+        double dotProduct;
+        double max = 0;
+
+        for (int i = 0; i < getVerticies().length; i++){
+
+            dotProduct = Point2d.dotProduct(getVerticies()[i], d);
+            if (max < dotProduct){
+                max = dotProduct;
+                vertexID = i;
+            }
+
+        }
+
+        return getVerticies()[vertexID];
+
+    }
 }

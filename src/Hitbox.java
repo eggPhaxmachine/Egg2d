@@ -37,6 +37,8 @@ public abstract class Hitbox implements Renderable{
     public abstract boolean AABBCheck(AABB aabb);
 
     //public abstract Point2d getLocation();
-    //public abstract void translate(Vector2d translation);
+    public abstract void translate(Vector2d translation);
+
+    public abstract Point2d GJKSupportFunction(Point2d d);
 
 }
