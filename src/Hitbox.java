@@ -30,7 +30,9 @@ public abstract class Hitbox implements Renderable{
     public abstract void render(Graphics2D renderer);
 
     @Override
-    public abstract void update();
+    public void update() {
+        translate(velocityVector);
+    }
 
     public abstract AABB fitAABB(double fattening);
 

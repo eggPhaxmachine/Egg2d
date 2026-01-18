@@ -10,17 +10,16 @@ public class Point2d {
 
 
     public Point2d(double x, double y){
-
         this.x = x;
         this.y = y;
-
     }
 
     public Point2d() {
+        this(0,0);
+    }
 
-        this.x = 0;
-        this.y = 0;
-
+    public Point2d(Point2d p1, Point2d p2){
+        this(p2.getX() - p1.getX(), p2.getY() - p1.getY());
     }
 
     public Point2d translate(Point2d translation){
@@ -35,6 +34,10 @@ public class Point2d {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 
     public static Point2d add(Point2d p1, Point2d p2){
         return new Point2d(p1.getX() + p2.getX(), p1.getY() + p2.getY());

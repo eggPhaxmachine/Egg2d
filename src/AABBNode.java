@@ -7,6 +7,8 @@ public class AABBNode {
     public AABB AABB;
     public Hitbox object;
 
+    public int id;
+
     public AABBNode(AABBNode childLeft, AABBNode childRight){
 
         this.childLeft = childLeft;
@@ -34,9 +36,10 @@ public class AABBNode {
 
     }
 
-    public AABBNode(Hitbox object){
+    public AABBNode(Hitbox object, int id){
 
         this.object = object;
+        this.id = id;
         AABB = object.fitAABB(Settings.Engine.AABB_FATTENING);
 
     }

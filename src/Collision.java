@@ -5,7 +5,7 @@ public class Collision {
     private Hitbox[] objects;
     public Hitbox[] getObjects() { return objects; }
 
-    private Point2d penetration;
+    private Vector2d penetration;
     public Point2d getPenetration() { return penetration; }
 
     private boolean collided;
@@ -14,30 +14,41 @@ public class Collision {
     public Collision(Hitbox obj1, Hitbox obj2){
 
         objects = new Hitbox[]{obj1, obj2};
+        check();
 
-        ArrayList<Point2d> simplexVertices = new ArrayList<>(3);
-        Point2d d = Settings.Engine.INITIAL_VECTOR;
+    }
 
-        simplexVertices.addFirst(obj1.GJKSupportFunction(d).translate(obj2.GJKSupportFunction(Point2d.multiply(d, -1))));
+    Point2d origin = new Point2d();
+    ArrayList<Point2d> simplexVertices;
+    Point2d p;
+    MinHeap<Wrapper<Point2d[], Vector2d>> features;
+    Wrapper<Point2d[], Vector2d> curFeature;
+    Wrapper<Point2d[], Vector2d> tempFeature;
+    public void check(){
 
-        d = new Vector2d(simplexVertices.getFirst(), new Point2d());
+        simplexVertices = new ArrayList<>();
+        p = Settings.Engine.INITIAL_VECTOR;
 
-        simplexVertices.addFirst(obj1.GJKSupportFunction(d).translate(obj2.GJKSupportFunction(Point2d.multiply(d, -1))));
+        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
+
+        p = new Vector2d(simplexVertices.getFirst(), origin);
+
+        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
 
         Vector2d ab = new Vector2d(simplexVertices.get(0), simplexVertices.get(1));
-        d = new Vector2d(Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), new Point2d()), ab));
+        p = Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), origin), ab);
 
         while(true) {
 
-            simplexVertices.addFirst(obj1.GJKSupportFunction(d).translate(obj2.GJKSupportFunction(Point2d.multiply(d, -1))));
+            simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
 
-            if(!Point2d.sameDirection(d, simplexVertices.getFirst())){
+            if(!Point2d.sameDirection(p, simplexVertices.getFirst())){
 
                 collided = false;
-                penetration = new Point2d();
+                penetration = new Vector2d(origin);
                 return;
 
-            } else if (checkTriangle(simplexVertices, d)) {
+            } else if (checkTriangle(simplexVertices, p)) {
 
                 collided = true;
                 break;
@@ -45,8 +56,36 @@ public class Collision {
             }
         }
 
-        
+        features = new MinHeap<>();
+        for(int i = 0; i < 3; i++){
+            curFeature = new Wrapper<>(new Point2d[]{simplexVertices.get(i), simplexVertices.get((i + 1) % 3)}, null);
+            curFeature.obj2 = Vector2d.lineToPoint(curFeature.obj1, origin);
+            features.add(curFeature, curFeature.obj2.getMagnitude());
+        }
 
+        while(true){
+
+            curFeature = features.popRoot().object;
+            p = Point2d.add(objects[0].GJKSupportFunction(curFeature.obj2), (objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))));
+
+            if (p == curFeature.obj1[0] || p == curFeature.obj1[1]) {
+                penetration = curFeature.obj2;
+                return;
+            }
+
+            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[0], p}, null);
+            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, origin);
+            features.add(tempFeature, tempFeature.obj2.getMagnitude());
+
+            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[1], p}, null);
+            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, origin);
+            features.add(tempFeature, tempFeature.obj2.getMagnitude());
+
+        }
+    }
+
+    public void correct(){
+        objects[0].translate(penetration);
     }
 
     public static boolean checkTriangle(ArrayList<Point2d> simplex, Point2d d){

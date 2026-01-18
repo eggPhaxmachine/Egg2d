@@ -4,13 +4,14 @@ public class PolygonHitbox extends Hitbox {
 
     private Point2d[] rawVerticies;
     public Vector2d updateVector = new Vector2d();
-    public Point2d[] getVerticies()
+    public Point2d[] getVertices()
     {
-        if(updateVector.getX() != 0 && updateVector.getY() != 0){
+        if(updateVector.getX() != 0 || updateVector.getY() != 0){
             for(Point2d vertex : rawVerticies){
                 vertex.translate(updateVector);
             }
         }
+        updateVector.multiply(0);
         return rawVerticies;
     }
 
@@ -28,7 +29,7 @@ public class PolygonHitbox extends Hitbox {
     private int[][] intVertices;
     public int[][] getIntVertices(){
 
-        Point2d[] vertices = getVerticies();
+        Point2d[] vertices = getVertices();
 
         for(int i = 0; i < numVertices; i++){
             intVertices[0][i] = (int) (vertices[i].getX() + 0.5);
@@ -54,23 +55,20 @@ public class PolygonHitbox extends Hitbox {
     }
 
     @Override
-    public void update() {
-        translate(velocityVector);
-    }
-
-    @Override
     public void render(Graphics2D renderer) {
-        throw new UnsupportedOperationException();
+        renderer.setColor(color);
+        int[][] vertices = getIntVertices();
+        renderer.drawPolygon(vertices[0], vertices[1], getNumVertices());
     }
 
     @Override
     public AABB fitAABB(double fattening) {
-        return AABB.fitBoundingBox(getVerticies(), fattening);
+        return AABB.fitBoundingBox(getVertices(), fattening);
     }
 
     @Override
     public boolean AABBCheck(AABB aabb) {
-        return AABB.AABBCheck(getVerticies(), aabb);
+        return AABB.AABBCheck(getVertices(), aabb);
     }
 
     public void translate(Vector2d translation){
@@ -86,9 +84,9 @@ public class PolygonHitbox extends Hitbox {
         double dotProduct;
         double max = 0;
 
-        for (int i = 0; i < getVerticies().length; i++){
+        for (int i = 0; i < getVertices().length; i++){
 
-            dotProduct = Point2d.dotProduct(getVerticies()[i], d);
+            dotProduct = Point2d.dotProduct(getVertices()[i], d);
             if (max < dotProduct){
                 max = dotProduct;
                 vertexID = i;
@@ -96,7 +94,7 @@ public class PolygonHitbox extends Hitbox {
 
         }
 
-        return getVerticies()[vertexID];
+        return getVertices()[vertexID];
 
     }
 }

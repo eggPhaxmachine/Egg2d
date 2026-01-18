@@ -1,37 +1,60 @@
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
-public class DynamicAABBTree {
+public class DynamicAABBTree implements Renderable {
 
     AABBNode tree;
 
+    private ArrayList<AABBNode> objects = new ArrayList<>();
     private ArrayList<AABBNode> dynamicObjects = new ArrayList<>();
     private ArrayList<AABBNode> constantObjects = new ArrayList<>();
 
-    public AABBNode[] getDynamicObjects(){
-        return dynamicObjects.toArray(AABBNode[]::new);
+    public Hitbox[] getObjects(){
+        Hitbox[] objects = new Hitbox[this.objects.size()];
+        for (int i = 0; i < this.objects.size(); i++){
+            objects[i] = this.objects.get(i).object;
+        }
+        return objects;
     }
-    public AABBNode[] getConstantObjects(){
-        return constantObjects.toArray(AABBNode[]::new);
+    public Hitbox[] getDynamicObjects(){
+        Hitbox[] dynamicObjects = new Hitbox[this.dynamicObjects.size()];
+        for (int i = 0; i < this.dynamicObjects.size(); i++){
+            dynamicObjects[i] = this.dynamicObjects.get(i).object;
+        }
+        return dynamicObjects;
+    }
+    public Hitbox[] getConstantObjects(){
+        Hitbox[] constantObjects = new Hitbox[this.constantObjects.size()];
+        for (int i = 0; i < this.constantObjects.size(); i++){
+            constantObjects[i] = this.constantObjects.get(i).object;
+        }
+        return constantObjects;
     }
     public void addObject(Hitbox object){
-
-        AABBNode objectNode = new AABBNode(object);
-
+        AABBNode objectNode = new AABBNode(object, objects.size());
+        objects.add(objectNode);
         if(object.isUpdatable()) {
             dynamicObjects.add(objectNode);
         } else {
             constantObjects.add(objectNode);
         }
+        addLeaf(objectNode);
     }
 
     public DynamicAABBTree(){
 
     }
 
+    @Override
     public void update(){
 
-        Collision[] collisionCandidates;
+        for(Hitbox object : getDynamicObjects()){
+            object.update();
+        }
+
+        ArrayList<Collision> collisionCandidates = new ArrayList<>();
 
         for(AABBNode node : dynamicObjects){
 
@@ -43,11 +66,8 @@ public class DynamicAABBTree {
 
             node.AABB = object.fitAABB(Settings.Engine.AABB_FATTENING);
             removeLeaf(node);
+            queryNode(node);
             addLeaf(node);
-
-            collisionCandidates = queryNode(node);
-
-
 
         }
 
@@ -138,7 +158,7 @@ public class DynamicAABBTree {
     private LinkedList<AABBNode> queryStack = new LinkedList<>();
     public Collision[] queryNode(AABBNode aabb){
 
-        queryStack.add(tree);
+        queryStack.addFirst(tree);
         AABBNode curNode;
 
         ArrayList<Collision> candidates = new ArrayList<>();
@@ -148,12 +168,12 @@ public class DynamicAABBTree {
             curNode = queryStack.getFirst();
             queryStack.removeFirst();
 
-            if(AABB.AABBCheck(aabb, curNode.AABB)){
+            if(AABB.AABBCheck(aabb.AABB, curNode.AABB)){
                 if(curNode.childLeft != null){
-                    candidates.add(new Collision(curNode.object, aabb.object));
+                    new Collision(curNode.object, aabb.object);
                 } else {
-                    queryStack.add(curNode.childLeft);
-                    queryStack.add(curNode.childRight);
+                    queryStack.addFirst(curNode.childLeft);
+                    queryStack.addFirst(curNode.childRight);
                 }
             }
 
@@ -162,4 +182,18 @@ public class DynamicAABBTree {
         return candidates.toArray(Collision[]::new);
 
     }
+
+    @Override
+    public void render(Graphics2D renderer) {
+
+        for(Hitbox object : getDynamicObjects()){
+            object.render(renderer);
+        }
+
+        for (Hitbox object : getConstantObjects()){
+            object.render(renderer);
+        }
+
+    }
+
 }

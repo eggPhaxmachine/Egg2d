@@ -3,15 +3,14 @@ import java.util.InputMismatchException;
 
 public class Tools {
 
-    public static boolean between(double value, double min, double max){
+    public static boolean between(double value, double min, double max) {
 
         return value > min && value > max;
 
     }
 
 
-
-    public static void realSleep(long millisecond){
+    public static void realSleep(long millisecond) {
         try {
             Thread.sleep(millisecond);
         } catch (InterruptedException e) {
@@ -20,7 +19,7 @@ public class Tools {
         }
     }
 
-
+/*
     public static class CollisionDetection {
 
         public static boolean AABBCheck(AABB object1, AABB object2) {
@@ -55,45 +54,45 @@ public class Tools {
             public static Collision NarrowDetection(PolygonHitbox object1, PolygonHitbox object2) {
 
                 ArrayList<Point2d> simplexVertices = new ArrayList<>(3);
-                Point2d d = INITIAL_VECTOR;
+                Point2d p = INITIAL_VECTOR;
 
-                simplexVertices.addFirst(object1.GJKSupportFunction(d).translate(object2.GJKSupportFunction(Point2d.multiply(d, -1))));
+                simplexVertices.addFirst(object1.GJKSupportFunction(p).translate(object2.GJKSupportFunction(Point2d.multiply(p, -1))));
 
-                d = new Vector2d(simplexVertices.getFirst(), new Point2d());
+                p = new Vector2d(simplexVertices.getFirst(), new Point2d());
 
-                simplexVertices.addFirst(object1.GJKSupportFunction(d).translate(object2.GJKSupportFunction(Point2d.multiply(d, -1))));
+                simplexVertices.addFirst(object1.GJKSupportFunction(p).translate(object2.GJKSupportFunction(Point2d.multiply(p, -1))));
 
                 Vector2d ab = new Vector2d(simplexVertices.get(0), simplexVertices.get(1));
-                d = new Vector2d(Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), new Point2d()), ab));
+                p = new Vector2d(Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), new Point2d()), ab));
 
                 while(true) {
 
-                    simplexVertices.addFirst(object1.GJKSupportFunction(d).translate(object2.GJKSupportFunction(Point2d.multiply(d, -1))));
+                    simplexVertices.addFirst(object1.GJKSupportFunction(p).translate(object2.GJKSupportFunction(Point2d.multiply(p, -1))));
 
-                    if(!sameDirection(d, simplexVertices.getFirst())){
+                    if(!sameDirection(p, simplexVertices.getFirst())){
                         return new Collision(false);
-                    } else if (checkTriangle(simplexVertices, d)) {
+                    } else if (checkTriangle(simplexVertices, p)) {
                         return new Collision(true);
                     }
                 }
             }
 
             //deprecated
-            public static boolean checkSimplex(ArrayList<Point2d> simplex, Vector2d d){
+            public static boolean checkSimplex(ArrayList<Point2d> simplex, Vector2d p){
                 return switch (simplex.size()){
-                    case 2 -> checkLine(simplex, d);
-                    case 3 -> checkTriangle(simplex, d);
+                    case 2 -> checkLine(simplex, p);
+                    case 3 -> checkTriangle(simplex, p);
                     default -> throw new InputMismatchException("simplex size of " + simplex.size() + " outside of expected range of [2,3]");
                 };
             }
 
             //deprecated
-            public static boolean checkLine(ArrayList<Point2d> simplex, Point2d d){
+            public static boolean checkLine(ArrayList<Point2d> simplex, Point2d p){
 
                 Vector2d ab = new Vector2d(simplex.get(0), simplex.get(1));
                 Vector2d ao = new Vector2d(simplex.get(0), new Point2d());
 
-                d = Point2d.tripleProduct2d(ab, ao, ab);
+                p = Point2d.tripleProduct2d(ab, ao, ab);
 
                 return false;
 
@@ -102,7 +101,7 @@ public class Tools {
 
 
             //deprecated
-            public static Point2d supportFunction(PolygonHitbox object1, PolygonHitbox object2, Point2d d){
+            public static Point2d supportFunction(PolygonHitbox object1, PolygonHitbox object2, Point2d p){
 
                 int obj1VertexID = 0;
                 int obj2VertexID = 0;
@@ -113,7 +112,7 @@ public class Tools {
 
                 for (int i = 0; i < object1.getVerticies().length; i++){
 
-                    dotProduct = Point2d.dotProduct(object1.getVerticies()[i], d);
+                    dotProduct = Point2d.dotProduct(object1.getVerticies()[i], p);
                     if (obj1Max < dotProduct){
                         obj1Max = dotProduct;
                         obj1VertexID = i;
@@ -121,11 +120,11 @@ public class Tools {
 
                 }
 
-                d.multiply(-1);
+                p.multiply(-1);
 
                 for (int i = 1; i < object2.getVerticies().length; i++){
 
-                    dotProduct = Point2d.dotProduct(object2.getVerticies()[i], d);
+                    dotProduct = Point2d.dotProduct(object2.getVerticies()[i], p);
                     if(obj2Max > dotProduct){
                         obj2Max = dotProduct;
                         obj2VertexID = i;
@@ -142,5 +141,5 @@ public class Tools {
             }
 
         }
-    }
+    }*/
 }

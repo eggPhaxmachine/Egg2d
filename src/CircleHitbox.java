@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public class CircleHitbox extends Hitbox{
-
+public class CircleHitbox {
+/*
     private double radius;
     public double getRadius() { return radius; }
 
@@ -32,5 +32,5 @@ public class CircleHitbox extends Hitbox{
         AABB.translate(translation);
 
     }
-
+*/
 }
