@@ -48,11 +48,9 @@ public class Vector2d extends Point2d {
         return new Vector2d(vector.x, vector.y).normalize();
     }
 
-    static Vector2d d;
-    static Vector2d u;
     public static Vector2d lineToPoint(Point2d[] line, Point2d p1){
-        d = new Vector2d(line[0], line[1]);
-        u = Vector2d.normalize(d);
+        Vector2d d = new Vector2d(line[0], line[1]);
+        Vector2d u = Vector2d.normalize(d);
         return new Vector2d(u.multiply(Point2d.dotProduct(Point2d.multiply(line[0], -1).translate(p1), u)).translate(line[0]).multiply(-1).translate(p1));
     }
 

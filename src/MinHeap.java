@@ -2,7 +2,15 @@ import java.util.ArrayList;
 
 public class MinHeap<T> {
 
-    private ArrayList<HeapNode<T>> heap = new ArrayList<>();
+    private ArrayList<HeapNode<T>> heap;
+
+    public MinHeap(int initialSize){
+        heap = new ArrayList<>(initialSize);
+    }
+
+    public MinHeap(){
+        this(10);
+    }
 
     public void add(T object, double priority){
         add(new HeapNode<T>(object, priority));

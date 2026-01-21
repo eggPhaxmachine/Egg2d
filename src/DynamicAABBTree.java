@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class DynamicAABBTree implements Renderable {
@@ -60,11 +59,11 @@ public class DynamicAABBTree implements Renderable {
 
             Hitbox object = node.object;
 
-            if(!object.AABBCheck(node.AABB)){
+            if(!object.AABBCheck(node.aabb)){
                 continue;
             }
 
-            node.AABB = object.fitAABB(Settings.Engine.AABB_FATTENING);
+            node.aabb = object.fitAABB(Settings.Engine.AABB_FATTENING);
             removeLeaf(node);
             queryNode(node);
             addLeaf(node);
@@ -90,24 +89,24 @@ public class DynamicAABBTree implements Renderable {
             try{
 
                 costLeft = AABB.fitBoundingBox(new Point2d[]{
-                        curNode.childLeft.AABB.getMinimumVertex(),
-                        curNode.childLeft.AABB.getMaximumVertex(),
-                        leaf.AABB.getMinimumVertex(),
-                        leaf.AABB.getMaximumVertex()
+                        curNode.childLeft.aabb.getMinimumVertex(),
+                        curNode.childLeft.aabb.getMaximumVertex(),
+                        leaf.aabb.getMinimumVertex(),
+                        leaf.aabb.getMaximumVertex()
                 }, 0);
 
                 costRight = AABB.fitBoundingBox(new Point2d[]{
-                        curNode.childRight.AABB.getMinimumVertex(),
-                        curNode.childRight.AABB.getMaximumVertex(),
-                        leaf.AABB.getMinimumVertex(),
-                        leaf.AABB.getMaximumVertex()
+                        curNode.childRight.aabb.getMinimumVertex(),
+                        curNode.childRight.aabb.getMaximumVertex(),
+                        leaf.aabb.getMinimumVertex(),
+                        leaf.aabb.getMaximumVertex()
                 }, 0);
 
                 if (costLeft.getSAHCost() > costRight.getSAHCost()){
-                    curNode.AABB = costRight;
+                    curNode.aabb = costRight;
                     curNode = curNode.childRight;
                 } else {
-                    curNode.AABB = costLeft;
+                    curNode.aabb = costLeft;
                     curNode = curNode.childLeft;
                 }
 
@@ -125,10 +124,10 @@ public class DynamicAABBTree implements Renderable {
 
         AABBNode curNode = leaf.parent;
         if (curNode.childLeft == leaf){
-            curNode.AABB = curNode.childRight.AABB;
+            curNode.aabb = curNode.childRight.aabb;
             curNode.object = curNode.childRight.object;
         } else {
-            curNode.AABB = curNode.childRight.AABB;
+            curNode.aabb = curNode.childRight.aabb;
             curNode.object = curNode.childRight.object;
         }
 
@@ -138,11 +137,11 @@ public class DynamicAABBTree implements Renderable {
         curNode = curNode.parent;
         while (true){
 
-            curNode.AABB = AABB.fitBoundingBox(new Point2d[]{
-                    curNode.childRight.AABB.getMinimumVertex(),
-                    curNode.childRight.AABB.getMaximumVertex(),
-                    curNode.childLeft.AABB.getMinimumVertex(),
-                    curNode.childLeft.AABB.getMaximumVertex()
+            curNode.aabb = AABB.fitBoundingBox(new Point2d[]{
+                    curNode.childRight.aabb.getMinimumVertex(),
+                    curNode.childRight.aabb.getMaximumVertex(),
+                    curNode.childLeft.aabb.getMinimumVertex(),
+                    curNode.childLeft.aabb.getMaximumVertex()
             }, 0);
 
             try {
@@ -168,7 +167,7 @@ public class DynamicAABBTree implements Renderable {
             curNode = queryStack.getFirst();
             queryStack.removeFirst();
 
-            if(AABB.AABBCheck(aabb.AABB, curNode.AABB)){
+            if(AABB.AABBCheck(aabb.aabb, curNode.aabb)){
                 if(curNode.childLeft != null){
                     new Collision(curNode.object, aabb.object);
                 } else {

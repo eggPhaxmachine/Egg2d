@@ -4,7 +4,7 @@ public class AABBNode {
     public AABBNode childLeft;
     public AABBNode childRight;
 
-    public AABB AABB;
+    public AABB aabb;
     public Hitbox object;
 
     public int id;
@@ -13,11 +13,11 @@ public class AABBNode {
 
         this.childLeft = childLeft;
         this.childRight = childRight;
-        AABB = AABB.fitBoundingBox(new Point2d[]{
-                childLeft.AABB.getMinimumVertex(),
-                childLeft.AABB.getMaximumVertex(),
-                childRight.AABB.getMinimumVertex(),
-                childRight.AABB.getMaximumVertex()
+        aabb = AABB.fitBoundingBox(new Point2d[]{
+                childLeft.aabb.getMinimumVertex(),
+                childLeft.aabb.getMaximumVertex(),
+                childRight.aabb.getMinimumVertex(),
+                childRight.aabb.getMaximumVertex()
         }, 0);
 
     }
@@ -27,11 +27,11 @@ public class AABBNode {
         this.parent = parent;
         this.childLeft = childLeft;
         this.childRight = childRight;
-        AABB = AABB.fitBoundingBox(new Point2d[]{
-                childLeft.AABB.getMinimumVertex(),
-                childLeft.AABB.getMaximumVertex(),
-                childRight.AABB.getMinimumVertex(),
-                childRight.AABB.getMaximumVertex()
+        aabb = AABB.fitBoundingBox(new Point2d[]{
+                childLeft.aabb.getMinimumVertex(),
+                childLeft.aabb.getMaximumVertex(),
+                childRight.aabb.getMinimumVertex(),
+                childRight.aabb.getMaximumVertex()
         }, 0);
 
     }
@@ -40,7 +40,7 @@ public class AABBNode {
 
         this.object = object;
         this.id = id;
-        AABB = object.fitAABB(Settings.Engine.AABB_FATTENING);
+        aabb = object.fitAABB(Settings.Engine.AABB_FATTENING);
 
     }
 }

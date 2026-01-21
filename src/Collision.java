@@ -17,38 +17,32 @@ public class Collision {
         check();
 
     }
-
-    Point2d origin = new Point2d();
-    ArrayList<Point2d> simplexVertices;
-    Point2d p;
-    MinHeap<Wrapper<Point2d[], Vector2d>> features;
-    Wrapper<Point2d[], Vector2d> curFeature;
-    Wrapper<Point2d[], Vector2d> tempFeature;
+    
     public void check(){
 
-        simplexVertices = new ArrayList<>();
-        p = Settings.Engine.INITIAL_VECTOR;
+        ArrayList<Point2d> simplexVertices = new ArrayList<>();
+        Point2d d = Settings.Engine.INITIAL_VECTOR;
 
-        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
+        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
 
-        p = new Vector2d(simplexVertices.getFirst(), origin);
+        d = new Vector2d(simplexVertices.getFirst(), Point2d.origin);
 
-        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
+        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
 
         Vector2d ab = new Vector2d(simplexVertices.get(0), simplexVertices.get(1));
-        p = Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), origin), ab);
+        d = Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), Point2d.origin), ab);
 
         while(true) {
 
-            simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(p), (objects[1].GJKSupportFunction(Point2d.multiply(p, -1)))));
+            simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
 
-            if(!Point2d.sameDirection(p, simplexVertices.getFirst())){
+            if(!Point2d.sameDirection(d, simplexVertices.getFirst())){
 
                 collided = false;
-                penetration = new Vector2d(origin);
+                penetration = new Vector2d(Point2d.origin);
                 return;
 
-            } else if (checkTriangle(simplexVertices, p)) {
+            } else if (checkTriangle(simplexVertices, d)) {
 
                 collided = true;
                 break;
@@ -56,29 +50,31 @@ public class Collision {
             }
         }
 
-        features = new MinHeap<>();
+        MinHeap<Wrapper<Point2d[], Vector2d>>  features = new MinHeap<>();
+        Wrapper<Point2d[], Vector2d>  curFeature;
         for(int i = 0; i < 3; i++){
             curFeature = new Wrapper<>(new Point2d[]{simplexVertices.get(i), simplexVertices.get((i + 1) % 3)}, null);
-            curFeature.obj2 = Vector2d.lineToPoint(curFeature.obj1, origin);
+            curFeature.obj2 = Vector2d.lineToPoint(curFeature.obj1, Point2d.origin);
             features.add(curFeature, curFeature.obj2.getMagnitude());
         }
 
         while(true){
 
             curFeature = features.popRoot().object;
-            p = Point2d.add(objects[0].GJKSupportFunction(curFeature.obj2), (objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))));
+            Wrapper<Point2d[], Vector2d> tempFeature;
+            d = Point2d.add(objects[0].GJKSupportFunction(curFeature.obj2), (objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))));
 
-            if (p == curFeature.obj1[0] || p == curFeature.obj1[1]) {
+            if (d == curFeature.obj1[0] || d == curFeature.obj1[1]) {
                 penetration = curFeature.obj2;
                 return;
             }
 
-            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[0], p}, null);
-            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, origin);
+            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[0], d}, null);
+            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, Point2d.origin);
             features.add(tempFeature, tempFeature.obj2.getMagnitude());
 
-            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[1], p}, null);
-            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, origin);
+            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[1], d}, null);
+            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, Point2d.origin);
             features.add(tempFeature, tempFeature.obj2.getMagnitude());
 
         }
@@ -88,11 +84,41 @@ public class Collision {
         objects[0].translate(penetration);
     }
 
-    public static boolean checkTriangle(ArrayList<Point2d> simplex, Point2d d){
+    private static boolean checkSimplex(ArrayList<Point2d> simplexVertices, Point2d d){
+        return switch (simplexVertices.size()) {
+            case (2) -> checkLine(simplexVertices, d);
+            case (3) -> checkTriangle(simplexVertices, d);
+            default -> throw new UnsupportedOperationException();
+        };
+    }
 
-        Vector2d ab = new Vector2d(simplex.get(0), simplex.get(1));
-        Vector2d ac = new Vector2d(simplex.get(0), simplex.get(2));
-        Vector2d ao = new Vector2d(simplex.get(0), new Point2d(0,0));
+    private static boolean checkLine(ArrayList<Point2d> simplex, Point2d d){
+
+        Point2d ab = new Point2d(simplex.get(0), simplex.get(1));
+        Point2d ao = Point2d.multiply(simplex.get(0), -1);
+
+        if(Point2d.sameDirection(ao, ab)){
+
+            Point2d temp = new Point2d(ab.x, -ab.y);
+            if (!Point2d.sameDirection(ao, temp)) {
+                temp.multiply(-1);
+            }
+            d = temp;
+
+        } else {
+            simplex.removeLast();
+            d = ao;
+        }
+
+        return false;
+
+    }
+
+    private static boolean checkTriangle(ArrayList<Point2d> simplex, Point2d d){
+
+        Point2d ab = new Point2d(simplex.get(0), simplex.get(1));
+        Point2d ac = new Point2d(simplex.get(0), simplex.get(2));
+        Point2d ao = Point2d.multiply(simplex.get(0), -1);
 
         if(Point2d.sameDirection(Point2d.tripleProduct2d(ac, ab, ac), ao)){
 
