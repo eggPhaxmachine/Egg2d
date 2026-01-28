@@ -5,7 +5,7 @@ public class Collision {
     private Hitbox[] objects;
     public Hitbox[] getObjects() { return objects; }
 
-    private Vector2d penetration;
+    private Point2d penetration;
     public Point2d getPenetration() { return penetration; }
 
     private boolean collided;
@@ -45,32 +45,32 @@ public class Collision {
             }
         }
 
-        MinHeap<Wrapper<Point2d[], Vector2d>>  features = new MinHeap<>();
-        Wrapper<Point2d[], Vector2d>  curFeature;
+        MinHeap<EPAFeature>  features = new MinHeap<>();
+        EPAFeature curFeature;
         for(int i = 0; i < 3; i++){
-            curFeature = new Wrapper<>(new Point2d[]{simplexVertices.get(i), simplexVertices.get((i + 1) % 3)}, null);
-            curFeature.obj2 = Vector2d.lineToPoint(curFeature.obj1, Point2d.origin);
-            features.add(curFeature, curFeature.obj2.getMagnitude());
+            curFeature = new EPAFeature(simplexVertices.get(i), simplexVertices.get((i + 1) % 3), null);
+            curFeature.dist = Vector2d.lineToPoint(curFeature.p1, curFeature.p2, Point2d.origin);
+            features.add(curFeature, curFeature.dist.getMagnitude());
         }
 
         while(true){
 
             curFeature = features.popRoot().object;
-            Wrapper<Point2d[], Vector2d> tempFeature;
-            d = new Point2d((objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))), objects[0].GJKSupportFunction(curFeature.obj2));
+            EPAFeature tempFeature;
+            d = new Point2d((objects[1].GJKSupportFunction(Point2d.multiply(curFeature.dist, -1))), objects[0].GJKSupportFunction(curFeature.dist));
 
-            if (d == curFeature.obj1[0] || d == curFeature.obj1[1]) {
-                penetration = curFeature.obj2;
+            if (d == curFeature.p1 || d == curFeature.p2) {
+                penetration = curFeature.dist;
                 return;
             }
 
-            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[0], d}, null);
-            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, Point2d.origin);
-            features.add(tempFeature, tempFeature.obj2.getMagnitude());
+            tempFeature = new EPAFeature(curFeature.p1, d, null);
+            tempFeature.dist = Vector2d.lineToPoint(tempFeature.p1, tempFeature.p2, Point2d.origin);
+            features.add(tempFeature, tempFeature.dist.getMagnitude());
 
-            tempFeature = new Wrapper<>(new Point2d[]{curFeature.obj1[1], d}, null);
-            tempFeature.obj2 = Vector2d.lineToPoint(tempFeature.obj1, Point2d.origin);
-            features.add(tempFeature, tempFeature.obj2.getMagnitude());
+            tempFeature = new EPAFeature(curFeature.p2, d, null);
+            tempFeature.dist = Vector2d.lineToPoint(tempFeature.p1, tempFeature.p2, Point2d.origin);
+            features.add(tempFeature, tempFeature.dist.getMagnitude());
 
         }
     }

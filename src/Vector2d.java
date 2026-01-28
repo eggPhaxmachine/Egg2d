@@ -1,3 +1,4 @@
+@Deprecated
 public class Vector2d extends Point2d {
 
     private double magnitude;
@@ -46,10 +47,14 @@ public class Vector2d extends Point2d {
         return new Vector2d(vector.x, vector.y).normalize();
     }
 
-    public static Vector2d lineToPoint(Point2d[] line, Point2d p1){
-        Vector2d d = new Vector2d(line[0], line[1]);
-        Vector2d u = Vector2d.normalize(d);
-        return new Vector2d(u.multiply(Point2d.dotProduct(Point2d.multiply(line[0], -1).translate(p1), u)).translate(line[0]).multiply(-1).translate(p1));
+
+
+    public static Vector2d perpendicular(Point2d a, Point2d b, Point2d d){
+        Point2d temp = new Point2d(b.getY() - a.getY(), a.getX() - b.getX());
+        if (!Point2d.sameDirection(new Point2d(a, d), temp)) {
+            temp.multiply(-1);
+        }
+        return new Vector2d(temp);
     }
 
 }

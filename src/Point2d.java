@@ -42,9 +42,17 @@ public class Point2d {
         return this;
     }
 
+    public double getMagnitude() {
+        return Math.pow((Math.pow(getX(), 2) + Math.pow(getY(), 2)), 0.5);
+    }
+
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    public boolean equals(Point2d p) {
+        return getY() == p.getY() && getX() == p.getX();
     }
 
     public static Point2d origin = new Point2d();
@@ -62,10 +70,19 @@ public class Point2d {
     }
 
     public static Point2d tripleProduct2d(Point2d p1, Point2d p2, Point2d p3){
-        return new Vector2d(multiply(p2, dotProduct(p1, p3)).translate(multiply(p3, -dotProduct(p1, p2))));
+        return multiply(p2, dotProduct(p1, p3)).translate(multiply(p3, -dotProduct(p1, p2)));
     }
 
     public static boolean sameDirection(Point2d d, Point2d target){
         return Point2d.dotProduct(d, target) > 0;
+    }
+
+    public static Point2d lineToPoint(Point2d a, Point2d b, Point2d p){
+        Point2d ab = new Point2d(a, b);
+        Point2d ap = new Point2d(a, p);
+        double scalar = Point2d.dotProduct(ap, ab);
+        scalar /= Math.pow(ab.getMagnitude(), 2);
+        ab.multiply(scalar);
+        return new Point2d(Point2d.origin, Point2d.add(a, ab));
     }
 }

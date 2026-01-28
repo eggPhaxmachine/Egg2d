@@ -71,7 +71,8 @@ public class PolygonHitbox extends Hitbox {
         return AABB.AABBCheck(getVertices(), aabb);
     }
 
-    public void translate(Vector2d translation){
+    @Override
+    public void translate(Point2d translation){
         //location.translate(translation);
         //boundingBox.translate(translation);
         updateVector.translate(translation);
