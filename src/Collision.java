@@ -23,18 +23,13 @@ public class Collision {
         ArrayList<Point2d> simplexVertices = new ArrayList<>();
         Point2d d = Settings.Engine.INITIAL_VECTOR;
 
-        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
+        simplexVertices.addFirst(new Point2d((objects[1].GJKSupportFunction(Point2d.multiply(d, -1))), objects[0].GJKSupportFunction(d)));
 
-        d = new Vector2d(simplexVertices.getFirst(), Point2d.origin);
-
-        simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
-
-        Vector2d ab = new Vector2d(simplexVertices.get(0), simplexVertices.get(1));
-        d = Point2d.tripleProduct2d(ab, new Vector2d(simplexVertices.getFirst(), Point2d.origin), ab);
+        d = Point2d.multiply(simplexVertices.getFirst(), -1);
 
         while(true) {
 
-            simplexVertices.addFirst(Point2d.add(objects[0].GJKSupportFunction(d), (objects[1].GJKSupportFunction(Point2d.multiply(d, -1)))));
+            simplexVertices.addFirst(new Point2d((objects[1].GJKSupportFunction(Point2d.multiply(d, -1))), objects[0].GJKSupportFunction(d)));
 
             if(!Point2d.sameDirection(d, simplexVertices.getFirst())){
 
@@ -42,7 +37,7 @@ public class Collision {
                 penetration = new Vector2d(Point2d.origin);
                 return;
 
-            } else if (checkTriangle(simplexVertices, d)) {
+            } else if (checkSimplex(simplexVertices, d)) {
 
                 collided = true;
                 break;
@@ -62,7 +57,7 @@ public class Collision {
 
             curFeature = features.popRoot().object;
             Wrapper<Point2d[], Vector2d> tempFeature;
-            d = Point2d.add(objects[0].GJKSupportFunction(curFeature.obj2), (objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))));
+            d = new Point2d((objects[1].GJKSupportFunction(Point2d.multiply(curFeature.obj2, -1))), objects[0].GJKSupportFunction(curFeature.obj2));
 
             if (d == curFeature.obj1[0] || d == curFeature.obj1[1]) {
                 penetration = curFeature.obj2;
@@ -99,15 +94,15 @@ public class Collision {
 
         if(Point2d.sameDirection(ao, ab)){
 
-            Point2d temp = new Point2d(ab.x, -ab.y);
+            Point2d temp = new Point2d(ab.getY(), -ab.getX());
             if (!Point2d.sameDirection(ao, temp)) {
                 temp.multiply(-1);
             }
-            d = temp;
+            d.set(temp);
 
         } else {
             simplex.removeLast();
-            d = ao;
+            d.set(ao);
         }
 
         return false;
@@ -116,22 +111,38 @@ public class Collision {
 
     private static boolean checkTriangle(ArrayList<Point2d> simplex, Point2d d){
 
-        Point2d ab = new Point2d(simplex.get(0), simplex.get(1));
-        Point2d ac = new Point2d(simplex.get(0), simplex.get(2));
         Point2d ao = Point2d.multiply(simplex.get(0), -1);
 
-        if(Point2d.sameDirection(Point2d.tripleProduct2d(ac, ab, ac), ao)){
+        Point2d abp;
+        Point2d ab;
+        ab = new Point2d(simplex.get(0), simplex.get(1));
+        abp = new Point2d(ab.getY() * -1, ab.getX());
+        if (Point2d.sameDirection(simplex.get(2), abp)){
+            abp.multiply(-1);
+        }
 
-            simplex.remove(1);
 
-        } else if (Point2d.sameDirection(Point2d.tripleProduct2d(ab, ac, ab), ao)) {
+        Point2d acp;
+        Point2d ac;
+        ac = new Point2d(simplex.get(0), simplex.get(2));
+        acp = new Point2d(ac.getY() * -1, ac.getX());
+        if (Point2d.sameDirection(simplex.get(1), acp)){
+            acp.multiply(-1);
+        }
 
-            simplex.remove(2);
-
+        if(Point2d.sameDirection(acp, ao)){
+            if (Point2d.sameDirection(ac, ao)){
+                simplex.remove(1);
+                d.set(acp);
+            } else {
+                simplex.removeLast();
+                return checkLine(simplex, d);
+            }
+        } else if (Point2d.sameDirection(abp, ao)){
+            simplex.removeLast();
+            return checkLine(simplex, d);
         } else {
-
             return true;
-
         }
 
         return false;

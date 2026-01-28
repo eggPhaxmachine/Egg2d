@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class CircleHitbox {
 /*
     private double radius;

@@ -1,5 +1,3 @@
-import java.util.Vector;
-
 public class Vector2d extends Point2d {
 
     private double magnitude;

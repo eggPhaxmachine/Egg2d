@@ -28,20 +28,11 @@ public class MinHeap<T> {
         heap.removeLast();
 
         int curNode = 0;
-        int childA = 1;
-        int childB = 2;
+        int childA;
+        int childB;
 
         while (true){
-            if (heap.get(childB).priority < heap.get(childA).priority){
-                childA = childB;
-            }
 
-            if (heap.get(curNode).priority <= heap.get(childA).priority){
-                return temp;
-            }
-
-            swap(curNode, childA);
-            curNode = childA;
             childA = 2 * curNode + 1;
             childB = 2 * curNode + 2;
 
@@ -52,6 +43,17 @@ public class MinHeap<T> {
                 if(heap.get(curNode).priority > heap.get(childA).priority) swap(curNode, childA);
                 return temp;
             }
+
+            if (heap.get(childB).priority < heap.get(childA).priority){
+                childA = childB;
+            }
+            if (heap.get(curNode).priority <= heap.get(childA).priority){
+                return temp;
+            }
+
+            swap(curNode, childA);
+            curNode = childA;
+
         }
 
     }
@@ -76,10 +78,9 @@ public class MinHeap<T> {
             }
         }
     }
-
-    HeapNode<T> temp;
+    
     private void swap(int a, int b){
-        temp = heap.get(a);
+        HeapNode<T> temp = heap.get(a);
         heap.set(a, heap.get(b));
         heap.set(b, temp);
     }

@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-
 public class Tools {
 
     public static boolean between(double value, double min, double max) {
