@@ -1,11 +1,15 @@
 package core.physics.shapes;
 
 import core.managment.GameObject;
+import core.physics.objects.RigidBody2d;
 import core.physics.space.Vector2d;
 
-public abstract class Shape2d extends GameObject {
+public abstract class Shape2d extends GameObject implements RigidBody2d {
 
-    public final int type;
+    public final int shapeType;
+    public int getShapeType() {
+        return shapeType;
+    }
 
     protected float area;
     public float getArea() {
@@ -20,7 +24,7 @@ public abstract class Shape2d extends GameObject {
     public Shape2d(int id, int type){
 
         super(id);
-        this.type = type;
+        this.shapeType = type;
 
     }
 

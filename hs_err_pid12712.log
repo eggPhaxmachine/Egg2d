@@ -18,7 +18,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:C:\Users\ep4039855\OneDrive - cpsb.org\Documents\ideaIC-2024.3.5.win\lib\idea_rt.jar=56432 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 Main
+Command Line: -javaagent:C:\Users\ep4039855\OneDrive - cpsb.org\Documents\ideaIC-2024.3.5.win\lib\idea_rt.jar=56432 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 game.Main
 
 Host: 11th Gen Intel(R) Core(TM) i3-1125G4 @ 2.00GHz, 8 cores, 7G,  Windows 11 , 64 bit Build 22621 (10.0.22621.6491)
 Time: Fri Apr 10 03:14:33 2026 Central Daylight Time elapsed time: 190.568544 seconds (0d 0h 3m 10s)
@@ -34,7 +34,7 @@ C  [igxelpicd64.dll+0xa29207]  (no source info available)
 
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 J 770  org.lwjgl.opengl.GL15C.glBindBuffer(II)V (0 bytes) @ 0x000001bab761d19c [0x000001bab761d140+0x000000000000005c]
-J 841% c2 Main.main([Ljava/lang/String;)V (118 bytes) @ 0x000001bab7627634 [0x000001bab76274e0+0x0000000000000154]
+J 841% c2 game.Main.main([Ljava/lang/String;)V (118 bytes) @ 0x000001bab7627634 [0x000001bab76274e0+0x0000000000000154]
 v  ~StubRoutines::call_stub 0x000001bab70410e7
 
 siginfo: EXCEPTION_UNCAUGHT_CXX_EXCEPTION (0xe06d7363), ExceptionInformation=0x0000000019930520 0x000000b35a5fede0 0x00007fffc4afb530 0x00007fffc37d0000 
@@ -240,7 +240,7 @@ Compiled method (n/a) 190801  770     n 0       org.lwjgl.opengl.GL15C::glBindBu
 [/MachCode]
 
 
-Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
+Compiled method (c2) 190830  841 %     4       game.Main::main @ 57 (118 bytes)
  total in heap  [0x000001bab7627190,0x000001bab7629440] = 8880
  relocation     [0x000001bab76272f0,0x000001bab76274d0] = 480
  main code      [0x000001bab76274e0,0x000001bab7627fc0] = 2784
@@ -257,7 +257,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
 
 [MachCode]
 [Verified Entry Point]
-  # {method} {0x000001bb06408138} 'main' '([Ljava/lang/String;)V' in 'Main'
+  # {method} {0x000001bb06408138} 'main' '([Ljava/lang/String;)V' in 'game.Main'
   0x000001bab76274e0: cc66 6666 | 0f1f 8400 | 0000 0000 | 6666 6690 | 8984 2400 | 80ff ff55 | 4883 ec70 | 4181 7f20 
   0x000001bab7627500: 0100 0000 | 0f85 a70a | 0000 488b | 1a4d 8b97 | 8803 0000 | 498b 3a48 | 8bca 49ba | 8008 77da 
   0x000001bab7627520: ff7f 0000 
@@ -286,7 +286,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@11 (line 117)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76275d0: 8c57 ffff 
 
   0x000001bab76275d4: ;   {other}
@@ -300,7 +300,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@20 (line 118)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76275e8: 746f ffff 
 
   0x000001bab76275ec: ;   {other}
@@ -313,7 +313,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glBindBuffer {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL15::glBindBuffer@2 (line 97)
                       ; - core.managment.WindowManager::drawTriangle@41 (line 134)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627630: 2c5b ffff 
 
   0x000001bab7627634: ;   {other}
@@ -327,7 +327,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glBufferData@15 (line 163)
                       ; - org.lwjgl.opengl.GL15::glBufferData@3 (line 177)
                       ; - core.managment.WindowManager::drawTriangle@49 (line 135)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627654: 0876 ffff 
 
   0x000001bab7627658: ;   {other}
@@ -341,7 +341,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL20C::glVertexAttribPointer@8 (line 1046)
                       ; - org.lwjgl.opengl.GL20::glVertexAttribPointer@8 (line 1014)
                       ; - core.managment.WindowManager::drawTriangle@60 (line 137)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627678: e479 ffff 
 
   0x000001bab762767c: ;   {other}
@@ -354,7 +354,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glEnableVertexAttribArray {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL20::glEnableVertexAttribArray@1 (line 1036)
                       ; - core.managment.WindowManager::drawTriangle@64 (line 138)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627688: d47d ffff 
 
   0x000001bab762768c: ;   {other}
@@ -367,7 +367,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glBindBuffer {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL15::glBindBuffer@2 (line 97)
                       ; - core.managment.WindowManager::drawTriangle@70 (line 140)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76276a0: bc5a ffff 
 
   0x000001bab76276a4: ;   {other}
@@ -380,7 +380,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glUseProgram {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL20::glUseProgram@1 (line 236)
                       ; - core.managment.WindowManager::drawTriangle@77 (line 142)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76276b8: a484 ffff 
 
   0x000001bab76276bc: ;   {other}
@@ -393,7 +393,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glDrawArrays {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL11::glDrawArrays@3 (line 1204)
                       ; - core.managment.WindowManager::drawTriangle@83 (line 143)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76276d4: 8888 ffff 
 
   0x000001bab76276d8: ;   {other}
@@ -407,7 +407,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic invokePV {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.glfw.GLFW::glfwSwapBuffers@17 (line 2337)
                       ; - core.managment.WindowManager::drawTriangle@90 (line 145)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627700: 5c4f ffff 
 
   0x000001bab7627704: ;   {other}
@@ -415,7 +415,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
 
   0x000001bab7627710: ; ImmutableOopMap {[32]=Oop [56]=Oop }
                       ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                      ; - (reexecute) Main::main@111 (line 27)
+                      ; - (reexecute) game.Main::main@111 (line 27)
                       ;   {poll}
   0x000001bab7627710: 0400 0041 | 8502 4c8b | 5424 2049 | 8b52 1048 | 85d2 0f84 | d404 0000 | 49b8 5088 | d224 f87f 
   0x000001bab7627730: ;   {static_call}
@@ -425,7 +425,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic invokePI {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.glfw.GLFW::glfwWindowShouldClose@17 (line 1049)
                       ; - core.managment.WindowManager::shouldClose@4 (line 115)
-                      ; - Main::main@58 (line 24)
+                      ; - game.Main::main@58 (line 24)
   0x000001bab7627734: 288c ffff 
 
   0x000001bab7627738: ;   {other}
@@ -436,7 +436,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
   0x000001bab762775c: ; ImmutableOopMap {[32]=Oop [56]=Oop }
                       ;*invokestatic invokePV {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.glfw.GLFW::glfwMakeContextCurrent@6 (line 2317)
-                      ; - Main::main@68 (line 25)
+                      ; - game.Main::main@68 (line 25)
   0x000001bab762775c: 004f ffff 
 
   0x000001bab7627760: ;   {other}
@@ -448,7 +448,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
   0x000001bab7627774: ; ImmutableOopMap {[32]=Oop [56]=Oop }
                       ;*invokestatic invokeV {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.glfw.GLFW::glfwPollEvents@5 (line 1600)
-                      ; - Main::main@71 (line 26)
+                      ; - game.Main::main@71 (line 26)
   0x000001bab7627774: e861 ffff 
 
   0x000001bab7627778: ;   {other}
@@ -465,7 +465,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic invokePV {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.glfw.GLFW::glfwMakeContextCurrent@6 (line 2317)
                       ; - core.managment.WindowManager::drawTriangle@4 (line 124)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab762781c: 404e ffff 
 
   0x000001bab7627820: ;   {other}
@@ -492,7 +492,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@11 (line 1370)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab76278ec: 7054 ffff 
 
   0x000001bab76278f0: ;   {other}
@@ -506,7 +506,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@20 (line 1371)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627904: 5864 ffff 
 
   0x000001bab7627908: ;   {other}
@@ -520,7 +520,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*invokestatic glBindVertexArray {reexecute=0 rethrow=0 return_oop=0}
                       ; - org.lwjgl.opengl.GL30::glBindVertexArray@1 (line 1262)
                       ; - core.managment.WindowManager::drawTriangle@12 (line 127)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627944: 1868 ffff 
 
   0x000001bab7627948: ;   {other}
@@ -536,7 +536,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.system.MemoryUtil::nmemAllocChecked@11 (line 244)
                       ; - org.lwjgl.system.MemoryUtil::memAllocFloat@5 (line 297)
                       ; - core.managment.WindowManager::drawTriangle@17 (line 129)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627958: 045c ffff 
 
   0x000001bab762795c: ;   {other}
@@ -564,7 +564,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627a10: ec00 a7ff 
 
   0x000001bab7627a14: ;   {other}
@@ -585,7 +585,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627a34: 4874 a6ff 
 
   0x000001bab7627a38: ;   {other}
@@ -605,7 +605,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627a60: 1c74 a6ff 
 
   0x000001bab7627a64: ;   {other}
@@ -626,7 +626,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627a8c: f073 a6ff 
 
   0x000001bab7627a90: ;   {other}
@@ -646,7 +646,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627ab8: c473 a6ff 
 
   0x000001bab7627abc: ;   {other}
@@ -660,7 +660,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
 
   0x000001bab7627ae4: ; ImmutableOopMap {rbp=Oop [32]=Oop [56]=Oop }
                       ;*newarray {reexecute=0 rethrow=0 return_oop=1}
-                      ; - Main::main@77 (line 27)
+                      ; - game.Main::main@77 (line 27)
   0x000001bab7627ae4: 18bc b3ff 
 
   0x000001bab7627ae8: ;   {other}
@@ -679,7 +679,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627b24: d8ff a6ff 
 
   0x000001bab7627b28: ;   {other}
@@ -698,7 +698,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627b54: a8ff a6ff 
 
   0x000001bab7627b58: ;   {other}
@@ -718,7 +718,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627b84: 78ff a6ff 
 
   0x000001bab7627b88: ;   {other}
@@ -735,7 +735,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@31 (line 1374)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627bbc: 40ff a6ff 
 
   0x000001bab7627bc0: ;   {other}
@@ -752,7 +752,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@31 (line 121)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627bf0: 0cff a6ff 
 
   0x000001bab7627bf4: ;   {other}
@@ -767,7 +767,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - (reexecute) org.lwjgl.system.Checks::check@3 (line 187)
                       ; - org.lwjgl.glfw.GLFW::glfwWindowShouldClose@11 (line 1047)
                       ; - core.managment.WindowManager::shouldClose@4 (line 115)
-                      ; - Main::main@58 (line 24)
+                      ; - game.Main::main@58 (line 24)
   0x000001bab7627c1c: e0fe a6ff 
 
   0x000001bab7627c20: ;   {other}
@@ -780,7 +780,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
                       ; - (reexecute) org.lwjgl.glfw.GLFW::glfwWindowShouldClose@20 (line 1049)
                       ; - core.managment.WindowManager::shouldClose@4 (line 115)
-                      ; - Main::main@58 (line 24)
+                      ; - game.Main::main@58 (line 24)
   0x000001bab7627c38: c4fe a6ff 
 
   0x000001bab7627c3c: ;   {other}
@@ -795,7 +795,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@11 (line 1370)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627c60: 9cfe a6ff 
 
   0x000001bab7627c64: ;   {other}
@@ -813,7 +813,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@11 (line 1370)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627ca4: 58fe a6ff 
 
   0x000001bab7627ca8: ;   {other}
@@ -830,7 +830,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@31 (line 1374)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627ce4: 18fe a6ff 
 
   0x000001bab7627ce8: ;   {other}
@@ -843,7 +843,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - (reexecute) org.lwjgl.system.MemoryUtil::nmemAllocChecked@24 (line 245)
                       ; - org.lwjgl.system.MemoryUtil::memAllocFloat@5 (line 297)
                       ; - core.managment.WindowManager::drawTriangle@17 (line 129)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627d0c: f0fd a6ff 
 
   0x000001bab7627d10: ;   {other}
@@ -859,7 +859,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@11 (line 117)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627d28: d4fd a6ff 
 
   0x000001bab7627d2c: ;   {other}
@@ -877,7 +877,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@11 (line 117)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627d58: a4fd a6ff 
 
   0x000001bab7627d5c: ;   {other}
@@ -894,7 +894,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@31 (line 121)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627d88: 74fd a6ff 
 
   0x000001bab7627d8c: ;   {other}
@@ -909,7 +909,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - (reexecute) org.lwjgl.system.Checks::check@3 (line 187)
                       ; - org.lwjgl.glfw.GLFW::glfwSwapBuffers@11 (line 2335)
                       ; - core.managment.WindowManager::drawTriangle@90 (line 145)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627db4: 48fd a6ff 
 
   0x000001bab7627db8: ;   {other}
@@ -920,7 +920,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
 
   0x000001bab7627dcc: ; ImmutableOopMap {rbp=Oop }
                       ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-                      ; - Main::main@57 (line 24)
+                      ; - game.Main::main@57 (line 24)
   0x000001bab7627dcc: 30fd a6ff 
 
   0x000001bab7627dd0: ;   {other}
@@ -934,7 +934,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627df4: 08fd a6ff 
 
   0x000001bab7627df8: ;   {other}
@@ -949,7 +949,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627e10: ecfc a6ff 
 
   0x000001bab7627e14: ;   {other}
@@ -967,7 +967,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627e28: d4fc a6ff 
 
   0x000001bab7627e2c: ;   {other}
@@ -982,7 +982,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627e40: bcfc a6ff 
 
   0x000001bab7627e44: ;   {other}
@@ -1000,7 +1000,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627e58: a4fc a6ff 
 
   0x000001bab7627e5c: ;   {other}
@@ -1015,7 +1015,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627e70: 8cfc a6ff 
 
   0x000001bab7627e74: ;   {other}
@@ -1033,7 +1033,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@0 (line 1368)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627ea0: 5cfc a6ff 
 
   0x000001bab7627ea4: ;   {other}
@@ -1049,7 +1049,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@0 (line 115)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627ec8: 34fc a6ff 
 
   0x000001bab7627ecc: ;   {other}
@@ -1060,7 +1060,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
 
   0x000001bab7627edc: ; ImmutableOopMap {}
                       ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-                      ; - Main::main@57 (line 24)
+                      ; - game.Main::main@57 (line 24)
   0x000001bab7627edc: 20fc a6ff 
 
   0x000001bab7627ee0: ;   {other}
@@ -1078,7 +1078,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL15C::glGenBuffers@40 (line 121)
                       ; - org.lwjgl.opengl.GL15::glGenBuffers@0 (line 132)
                       ; - core.managment.WindowManager::drawTriangle@32 (line 133)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627f74: 086f a6ff 
 
   0x000001bab7627f78: ;   {other}
@@ -1092,7 +1092,7 @@ Compiled method (c2) 190830  841 %     4       Main::main @ 57 (118 bytes)
                       ; - org.lwjgl.opengl.GL30C::glGenVertexArrays@40 (line 1374)
                       ; - org.lwjgl.opengl.GL30::glGenVertexArrays@0 (line 1297)
                       ; - core.managment.WindowManager::drawTriangle@7 (line 126)
-                      ; - Main::main@108 (line 27)
+                      ; - game.Main::main@108 (line 27)
   0x000001bab7627f98: e46e a6ff 
 
   0x000001bab7627f9c: ;   {other}
@@ -1254,7 +1254,7 @@ Other Threads:
   0x000001bb4e99cc20 WorkerThread "GC Thread#4"                     [id=11000, stack(0x000000b35b800000,0x000000b35b900000) (1024K)]
   0x000001bb489fcc20 WorkerThread "GC Thread#5"                     [id=21176, stack(0x000000b35b900000,0x000000b35ba00000) (1024K)]
   0x000001bb5493cc20 WorkerThread "GC Thread#6"                     [id=18768, stack(0x000000b35bf00000,0x000000b35c000000) (1024K)]
-  0x000001baa73a40f0 ConcurrentGCThread "G1 Main Marker"            [id=31552, stack(0x000000b35a700000,0x000000b35a800000) (1024K)]
+  0x000001baa73a40f0 ConcurrentGCThread "G1 game.Main Marker"            [id=31552, stack(0x000000b35a700000,0x000000b35a800000) (1024K)]
   0x000001baa73a4db0 WorkerThread "G1 Conc#0"                       [id=14376, stack(0x000000b35a800000,0x000000b35a900000) (1024K)]
   0x000001bac4505590 ConcurrentGCThread "G1 Refine#0"               [id=12916, stack(0x000000b35a900000,0x000000b35aa00000) (1024K)]
   0x000001bac4506110 ConcurrentGCThread "G1 Service"                [id=29648, stack(0x000000b35aa00000,0x000000b35ab00000) (1024K)]
@@ -1498,13 +1498,13 @@ Event: 3.417 Thread 0x000001bac466e8f0  836       4       org.lwjgl.glfw.GLFW::g
 Event: 3.417 Thread 0x000001bac466e8f0 nmethod 836 0x000001bab7626710 code [0x000001bab76268a0, 0x000001bab7626940]
 Event: 3.444 Thread 0x000001bac466e8f0  837       4       core.managment.WindowManager::shouldClose (8 bytes)
 Event: 3.445 Thread 0x000001bac466e8f0 nmethod 837 0x000001bab7626a10 code [0x000001bab7626ba0, 0x000001bab7626cb0]
-Event: 22.763 Thread 0x000001bac46794e0  838 %     3       Main::main @ 57 (118 bytes)
+Event: 22.763 Thread 0x000001bac46794e0  838 %     3       game.Main::main @ 57 (118 bytes)
 Event: 22.784 Thread 0x000001bac46794e0 nmethod 838% 0x000001baafc30890 code [0x000001baafc30ae0, 0x000001baafc31220]
-Event: 23.287 Thread 0x000001bac46794e0  839       3       Main::main (118 bytes)
+Event: 23.287 Thread 0x000001bac46794e0  839       3       game.Main::main (118 bytes)
 Event: 23.289 Thread 0x000001bac46794e0 nmethod 839 0x000001baafc31490 code [0x000001baafc316e0, 0x000001baafc31d98]
 Event: 23.764 Thread 0x000001bac466e8f0  840       4       org.lwjgl.glfw.GLFW::glfwWindowShouldClose (29 bytes)
 Event: 23.767 Thread 0x000001bac466e8f0 nmethod 840 0x000001bab7626e10 code [0x000001bab7626fa0, 0x000001bab7627088]
-Event: 43.172 Thread 0x000001bac466e8f0  841 %     4       Main::main @ 57 (118 bytes)
+Event: 43.172 Thread 0x000001bac466e8f0  841 %     4       game.Main::main @ 57 (118 bytes)
 Event: 43.313 Thread 0x000001bac466e8f0 nmethod 841% 0x000001bab7627190 code [0x000001bab76274e0, 0x000001bab76280e8]
 
 GC Heap History (2 events):
@@ -1749,7 +1749,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Us
 
 VM Arguments:
 jvm_args: -javaagent:C:\Users\ep4039855\OneDrive - cpsb.org\Documents\ideaIC-2024.3.5.win\lib\idea_rt.jar=56432 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 
-java_command: Main
+java_command: game.Main
 java_class_path (initial): C:\Users\ep4039855\Code!\Egg2d\untitled\target\classes;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl\3.4.1\lwjgl-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-assimp\3.4.1\lwjgl-assimp-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-glfw\3.4.1\lwjgl-glfw-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-openal\3.4.1\lwjgl-openal-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-opengl\3.4.1\lwjgl-opengl-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-stb\3.4.1\lwjgl-stb-3.4.1.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl\3.4.1\lwjgl-3.4.1-natives-windows.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-assimp\3.4.1\lwjgl-assimp-3.4.1-natives-windows.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-glfw\3.4.1\lwjgl-glfw-3.4.1-natives-windows.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-openal\3.4.1\lwjgl-openal-3.4.1-natives-windows.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-opengl\3.4.1\lwjgl-opengl-3.4.1-natives-windows.jar;C:\Users\ep4039855\.m2\repository\org\lwjgl\lwjgl-stb\3.4.1\lwjgl-stb-3.4.1-natives-windows.jar
 Launcher Type: SUN_STANDARD
 

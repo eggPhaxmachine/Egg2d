@@ -6,4 +6,6 @@ public interface NarrowPhaseDetection {
 
     Vector2d check();
 
+    Vector2d[] generateContacts(Vector2d collisionNormal, float penetration);
+
 }

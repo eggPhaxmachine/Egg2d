@@ -64,4 +64,9 @@ public class PCNarrowPhaseDetection implements NarrowPhaseDetection {
 
         return minPenetration;
     }
+
+    @Override
+    public Vector2d[] generateContacts(Vector2d collisionNormal, float penetration) {
+        return new Vector2d[]{collisionNormal.copy().multiply(-penetration).add(circle.getCenter())};
+    }
 }

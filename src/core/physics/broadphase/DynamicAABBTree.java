@@ -1,5 +1,7 @@
 package core.physics.broadphase;
 
+import core.physics.narrowphase.Collision;
+import core.physics.shapes.Shape2d;
 import core.physics.space.Vector2d;
 import core.util.Stack;
 
@@ -28,7 +30,7 @@ public class DynamicAABBTree {
             node.collisionsIds.add(collisionId);
             result.collisionsIds.add(collisionId);
 
-            collisions.put(collisionId, new Collision(object, result.object));
+            collisions.put(collisionId, new Collision((Shape2d) object, (Shape2d) result.object));
 
         }
         addLeaf(node);
@@ -50,15 +52,17 @@ public class DynamicAABBTree {
             node.collisionsIds.add(collisionId);
             result.collisionsIds.add(collisionId);
 
-            collisions.put(collisionId, new Collision(object, result.object));
+            collisions.put(collisionId, new Collision((Shape2d) object, (Shape2d) result.object));
 
         }
         addLeaf(node);
 
     }
 
-    private final HashMap<Long, PPCollision> collisions = new HashMap<>();
-
+    private final HashMap<Long, Collision> collisions = new HashMap<>();
+    public Collision[] getCollisions() {
+        return collisions.values().toArray(Collision[]::new);
+    }
 
     public void update(){
 
@@ -92,7 +96,7 @@ public class DynamicAABBTree {
                     node.collisionsIds.add(collisionId);
                     result.collisionsIds.add(collisionId);
 
-                    collisions.put(collisionId, new Collision(node.object, result.object));
+                    collisions.put(collisionId, new Collision((Shape2d) node.object, (Shape2d) result.object));
 
                 }
 
@@ -227,7 +231,7 @@ public class DynamicAABBTree {
         }
     }
 
-    public ArrayList<AABBLeaf> queryNode(AABB aabb){
+    private ArrayList<AABBLeaf> queryNode(AABB aabb){
 
         ArrayList<AABBLeaf> results = new ArrayList<>();
 

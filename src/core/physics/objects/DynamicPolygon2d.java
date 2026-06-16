@@ -162,11 +162,11 @@ public class DynamicPolygon2d extends Polygon2d implements DynamicBody2d {
 
         Vector2d normal = Vector2d.normalize(velocity);
 
-        if (normal.x > 0) xMax += (normal.x * Settings.Engine.AABB_FATTENING);
-        else xMin += (normal.x * Settings.Engine.AABB_FATTENING);
+        if (normal.x > 0) xMax += (normal.x * 50);
+        else xMin += (normal.x * 50);
 
-        if (normal.y > 0) yMax += (normal.y * Settings.Engine.AABB_FATTENING);
-        else yMin += (normal.y * Settings.Engine.AABB_FATTENING);
+        if (normal.y > 0) yMax += (normal.y * 50);
+        else yMin += (normal.y * 50);
 
         return new AABB(new Vector2d(xMin, yMin), new Vector2d(xMax, yMax));
 

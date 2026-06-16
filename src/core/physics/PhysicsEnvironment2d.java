@@ -1,9 +1,13 @@
 package core.physics;
 
+import core.managment.GameManager;
 import core.physics.broadphase.DynamicAABBTree;
+import core.physics.narrowphase.Collision;
 import core.physics.objects.DynamicBody2d;
 import core.physics.objects.RigidBody2d;
 import core.physics.objects.StaticBody2d;
+import core.physics.space.Vector2d;
+import core.managment.Environment;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -21,21 +25,20 @@ public class PhysicsEnvironment2d extends Environment {
         return constants.toArray(RigidBody2d[]::new);
     }
 
-    public void addDynamic(DynamicPolygon2d object){
+    public void addDynamic(DynamicBody2d object){
 
         dynamics.add(object);
-        candidates = broadPhase.addDynamic(object);
+        broadPhase.addDynamic(object);
 
     }
 
     public void addConstant(StaticBody2d object){
 
         constants.add(object);
-        candidates = broadPhase.addConstant(object);
+        broadPhase.addConstant(object);
 
     }
 
-    private PPCollision[] candidates;
     private final DynamicAABBTree broadPhase = new DynamicAABBTree();
 
     private Vector2d constant = new Vector2d(0, 0);// -100);
@@ -53,15 +56,6 @@ public class PhysicsEnvironment2d extends Environment {
     public void setResistance(float resistance) {
         if (resistance > 1 || resistance < 0) throw new InputMismatchException("Resistance must be between 0 and 1");
         this.resistance = resistance;
-    }
-
-    private float restitution = 1f;
-    public float getRestitution() {
-        return restitution;
-    }
-    public void setRestitution(float restitution) {
-        if (restitution > 1 || restitution < 0) throw new InputMismatchException("Coefficient of restitution must be between 0 and 1");
-        this.restitution = restitution;
     }
 
     public void update(){
@@ -84,11 +78,14 @@ public class PhysicsEnvironment2d extends Environment {
 
         }
 
-        candidates = broadPhase.update();
+        Collision[] candidates = broadPhase.getCollisions();
 
-        for (PPCollision candidate : candidates){
+        for (Collision candidate : candidates){
             candidate.check();
-            candidate.correct(restitution);
+            if (candidate.isCollided()){
+                candidate.correct();
+                int i = 1;
+            }
         }
 
     }

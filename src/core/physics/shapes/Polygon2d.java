@@ -4,7 +4,7 @@ import core.physics.space.Vector2d;
 
 import java.util.InputMismatchException;
 
-public class Polygon2d extends Shape2d {
+public abstract class Polygon2d extends Shape2d {
 
     protected final Vector2d[] vertices;
     public Vector2d[] getVertices() {

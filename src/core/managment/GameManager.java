@@ -1,5 +1,6 @@
 package core.managment;
 
+import game.TestScene;
 import org.lwjgl.glfw.GLFW;
 
 public class GameManager {

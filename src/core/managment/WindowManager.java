@@ -105,11 +105,11 @@ public class WindowManager {
 
         if (settings.getVertexShaderSource() == null) {
             System.err.println("Vertex shader source not set, using default: shaders/VertexShader.glsl");
-            settings.setVertexShaderSource("core/rendering/shaders/VertexShader.glsl");
+            settings.setVertexShaderSource("shaders/VertexShader.glsl");
         }
         if (settings.getFragmentShaderSource() == null){
             System.err.println("Fragment shader source not set, using default: shaders/FragmentShader.glsl");
-            settings.setFragmentShaderSource("core/rendering/shaders/FragmentShader.glsl");
+            settings.setFragmentShaderSource("shaders/FragmentShader.glsl");
         }
         loadShaders();
 
@@ -212,7 +212,7 @@ public class WindowManager {
         public void setVertexShaderSource(String pathString){
             Path path = Paths.get(pathString);
             if (!Files.isRegularFile(path)){
-                throw new RuntimeException("\nFile at \n" + pathString + "\" is inaccessible");
+                throw new RuntimeException("\nFile at \"" + pathString + "\" is inaccessible");
             }
             this.vertexShaderSource = path;
         }
@@ -227,7 +227,7 @@ public class WindowManager {
         public void setFragmentShaderSource(String pathString) {
             Path path = Paths.get(pathString);
             if (!Files.isRegularFile(path)){
-                throw new RuntimeException("\nFile at \n" + pathString + "\" is inaccessible");
+                throw new RuntimeException("\nFile at \"" + pathString + "\" is inaccessible");
             }
             this.fragmentShaderSource = path;
         }

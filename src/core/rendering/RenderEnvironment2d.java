@@ -1,5 +1,7 @@
 package core.rendering;
 
+import core.managment.Environment;
+import core.managment.GameManager;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 

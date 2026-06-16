@@ -15,6 +15,8 @@ public interface DynamicBody2d extends RigidBody2d {
     float getAngularVelocity();
     void setAngularVelocity(float angularVelocity);
 
+    Vector2d getCenter();
+
     void translate(Vector2d translation);
     void rotate(float theta);
 

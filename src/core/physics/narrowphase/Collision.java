@@ -1,6 +1,6 @@
 package core.physics.narrowphase;
 
-import core.physics.objects.RigidBody2d;
+import core.physics.objects.DynamicBody2d;
 import core.physics.shapes.Circle2d;
 import core.physics.shapes.Polygon2d;
 import core.physics.shapes.Shape2d;
@@ -34,32 +34,28 @@ public class Collision {
         return contacts;
     }
 
-
     private final NarrowPhaseDetection narrowPhase;
 
     private final PhysicsResolution physicsResolution;
 
+
     public Collision(Shape2d[] objects){
 
         if (objects.length > 2) throw new InputMismatchException("Collisions can only compare two objects");
-        if (objects[0].type < objects[1].type){
-            objects = new Shape2d[]{objects[1], objects[0]};
-        } else {
-            this.objects = objects;
-        }
+        this.objects = objects;
 
         try {
-            narrowPhase = narrowPhaseDispatcher.get(this.objects[0].type).get(this.objects[1].type).apply(objects);
+            narrowPhase = narrowPhaseDispatcher.get(objects[0].shapeType).get(objects[1].shapeType).apply(objects);
             if (narrowPhase == null) throw new ArrayIndexOutOfBoundsException();
         } catch (ArrayIndexOutOfBoundsException e){
-            throw new UnsupportedOperationException("No narrow phase implementation for shape types: " + this.objects[0].type + ", " + this.objects[1].type);
+            throw new UnsupportedOperationException("No narrow phase implementation for shape types: " + this.objects[0].shapeType + ", " + this.objects[1].shapeType);
         }
 
         try {
-            physicsResolution = physicsResolutionDispatcher.get(this.objects[0].type).get(this.objects[1].type).apply(objects);
+            physicsResolution = physicsResolutionDispatcher.get(objects[0].getBodyType() == 1 ? objects[0].getBodyType() : objects[1].getBodyType()).apply(objects);
             if (physicsResolution == null) throw new ArrayIndexOutOfBoundsException();
         } catch (ArrayIndexOutOfBoundsException e){
-            throw new UnsupportedOperationException("No physics resolution implementation for body types: " + this.objects[0].type + ", " + this.objects[1].type);
+            throw new UnsupportedOperationException("No physics resolution implementation for body types: " + this.objects[0].shapeType + ", " + this.objects[1].shapeType);
         }
 
     }
@@ -69,22 +65,48 @@ public class Collision {
     }
 
 
-    private final static ArrayList<ArrayList<Function<Shape2d[], NarrowPhaseDetection>>> narrowPhaseDispatcher = new ArrayList<>(3);
-    private final static ArrayList<ArrayList<Function<Shape2d[], PhysicsResolution>>> physicsResolutionDispatcher = new ArrayList<>(3);
+    public void check(){
+
+        Vector2d penetrationVector = narrowPhase.check();
+
+        penetration = penetrationVector.getMagnitude();
+        collisionNormal = penetrationVector.multiply(1/penetration);
+
+        if (penetration != 0) {
+            collided = true;
+            contacts = narrowPhase.generateContacts(collisionNormal, penetration);
+        } else {
+            collided = false;
+        }
+
+    }
+
+    public void correct(){
+        physicsResolution.correct(contacts, collisionNormal, penetration);
+    }
+
+
+    private final static ArrayList<ArrayList<Function<Shape2d[], NarrowPhaseDetection>>> narrowPhaseDispatcher = new ArrayList<>(2);
+    private final static ArrayList<Function<Shape2d[], PhysicsResolution>> physicsResolutionDispatcher = new ArrayList<>(2);
 
     static {
 
         ArrayList<Function<Shape2d[], NarrowPhaseDetection>> curArray;
 
-        curArray = new ArrayList<>(3);
-        curArray.add((Shape2d[] shapes) -> new PPNarrowPhaseDetection((Polygon2d[]) shapes));
+        curArray = new ArrayList<>(2);
+        curArray.add((Shape2d[] shapes) -> new PPNarrowPhaseDetection(new Polygon2d[]{(Polygon2d) shapes[0], (Polygon2d) shapes[1]}));
         curArray.add((Shape2d[] shapes) -> new PCNarrowPhaseDetection((Polygon2d) shapes[0], (Circle2d) shapes[1]));
         narrowPhaseDispatcher.add(curArray);
 
-        curArray = new ArrayList<>(3);
-        curArray.add(null);
-        curArray.add((Shape2d[] shapes) -> new CCNarrowPhaseDetection((Circle2d[]) shapes));
+        curArray = new ArrayList<>(2);
+        curArray.add((Shape2d[] shapes) -> new PCNarrowPhaseDetection((Polygon2d) shapes[1], (Circle2d) shapes[0]));
+        curArray.add((Shape2d[] shapes) -> new CCNarrowPhaseDetection(new Circle2d[]{(Circle2d) shapes[0], (Circle2d) shapes[1]}));
         narrowPhaseDispatcher.add(curArray);
+
+
+        physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DDPhysicsResolution(new DynamicBody2d[]{(DynamicBody2d) shapes[0], (DynamicBody2d) shapes[1]}));
+        physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DKPhysicsResolution());
+        physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DSPhysicsResolution());
 
     }
 

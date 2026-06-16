@@ -2,7 +2,7 @@ package core.physics.shapes;
 
 import core.physics.space.Vector2d;
 
-public class Circle2d extends Shape2d {
+public abstract class Circle2d extends Shape2d {
 
     protected final float radius;
     public float getRadius() {

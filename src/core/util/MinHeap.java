@@ -14,7 +14,7 @@ public class MinHeap<T> {
         this(10);
     }
 
-    public void add(T object, double priority){
+    public void add(T object, float priority){
         heap.add(new Node<>(object, priority));
         bubbleUp(heap.size() - 1);
     }
@@ -88,9 +88,9 @@ public class MinHeap<T> {
     private static class Node<T> {
 
         T object;
-        double priority;
+        float priority;
 
-        public Node(T object, double priority){
+        public Node(T object, float priority){
             this.object = object;
             this.priority = priority;
         }
