@@ -1,6 +1,6 @@
-package core.physics.objects;
+package physics.objects;
 
-import core.physics.space.Vector2d;
+import physics.space.Vector2d;
 
 public interface DynamicBody2d extends RigidBody2d {
 

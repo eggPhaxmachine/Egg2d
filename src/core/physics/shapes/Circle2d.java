@@ -1,6 +1,6 @@
-package core.physics.shapes;
+package physics.shapes;
 
-import core.physics.space.Vector2d;
+import physics.space.Vector2d;
 
 public abstract class Circle2d extends Shape2d {
 

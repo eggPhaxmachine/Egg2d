@@ -1,6 +1,7 @@
-package core.physics.objects;
+package physics.objects;
 
-import core.physics.broadphase.BroadPhaseObject;
+import physics.broadphase.BroadPhaseObject;
+import physics.shapes.Shape2d;
 
 public interface RigidBody2d extends BroadPhaseObject {
 

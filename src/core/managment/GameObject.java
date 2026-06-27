@@ -1,4 +1,4 @@
-package core.managment;
+package managment;
 
 public abstract class GameObject {
 
@@ -9,6 +9,7 @@ public abstract class GameObject {
 
     public GameObject(int id) {
         this.id = id;
+
         GameManager.getCurrentScene().addGameObject(this);
     }
 

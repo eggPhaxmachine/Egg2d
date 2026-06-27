@@ -1,4 +1,4 @@
-package core.physics.broadphase;
+package physics.broadphase;
 
 public interface BroadPhaseObject {
 

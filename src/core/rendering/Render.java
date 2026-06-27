@@ -1,4 +1,4 @@
-package core.rendering;
+package rendering;
 
 public interface Render {
 

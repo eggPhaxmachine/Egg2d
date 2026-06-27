@@ -1,4 +1,4 @@
-package core.managment;
+package managment;
 
 import game.TestScene;
 import org.lwjgl.glfw.GLFW;
@@ -56,8 +56,8 @@ public class GameManager {
 
         public static final class Window {
 
-            public static final int defaultHeight = 1080;
-            public static final int defaultWidth = 1920;
+            public static final int defaultHeight = 768;
+            public static final int defaultWidth = 1366;
 
             public static final String  defaultTitle = "";
 

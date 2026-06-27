@@ -1,4 +1,4 @@
-package core.physics.broadphase;
+package physics.broadphase;
 
 import java.util.HashSet;
 
@@ -14,7 +14,7 @@ public class AABBLeaf extends AABBNode {
         this.object = object;
         this.dynamic = dynamic;
 
-        if (dynamic) collisionsIds = new HashSet<>(4);
+        collisionsIds = new HashSet<>(4);
         this.aabb = object.fitAABB();
 
     }

@@ -1,4 +1,4 @@
-package core.rendering.shaders;
+package rendering.shaders;
 
 public class ShaderCompileException extends RuntimeException {
     public ShaderCompileException(String message) {

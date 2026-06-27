@@ -1,4 +1,4 @@
-package core.rendering.shaders;
+package rendering.shaders;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;

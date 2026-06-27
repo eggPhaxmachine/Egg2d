@@ -1,10 +1,11 @@
-package core.physics.narrowphase;
+package physics.narrowphase;
 
-import core.physics.objects.DynamicBody2d;
-import core.physics.shapes.Circle2d;
-import core.physics.shapes.Polygon2d;
-import core.physics.shapes.Shape2d;
-import core.physics.space.Vector2d;
+import physics.objects.DynamicBody2d;
+import physics.objects.StaticBody2d;
+import physics.shapes.Circle2d;
+import physics.shapes.Polygon2d;
+import physics.shapes.Shape2d;
+import physics.space.Vector2d;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -94,7 +95,7 @@ public class Collision {
         ArrayList<Function<Shape2d[], NarrowPhaseDetection>> curArray;
 
         curArray = new ArrayList<>(2);
-        curArray.add((Shape2d[] shapes) -> new PPNarrowPhaseDetection(new Polygon2d[]{(Polygon2d) shapes[0], (Polygon2d) shapes[1]}));
+        curArray.add((Shape2d[] shapes) -> new PPSATNarrowPhase(new Polygon2d[]{(Polygon2d) shapes[0], (Polygon2d) shapes[1]}));
         curArray.add((Shape2d[] shapes) -> new PCNarrowPhaseDetection((Polygon2d) shapes[0], (Circle2d) shapes[1]));
         narrowPhaseDispatcher.add(curArray);
 
@@ -106,7 +107,7 @@ public class Collision {
 
         physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DDPhysicsResolution(new DynamicBody2d[]{(DynamicBody2d) shapes[0], (DynamicBody2d) shapes[1]}));
         physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DKPhysicsResolution());
-        physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DSPhysicsResolution());
+        physicsResolutionDispatcher.add((Shape2d[] shapes) -> new DSPhysicsResolution((DynamicBody2d) shapes[0], (StaticBody2d) shapes[1]));
 
     }
 

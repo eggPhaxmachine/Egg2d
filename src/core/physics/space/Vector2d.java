@@ -1,4 +1,4 @@
-package core.physics.space;
+package physics.space;
 
 public class Vector2d {
 
@@ -68,6 +68,10 @@ public class Vector2d {
 
     public boolean equals(Vector2d p) {
         return getY() == p.getY() && getX() == p.getX();
+    }
+
+    public boolean equals(Vector2d p, float range) {
+        return x - range < p.x && x + range > p.x && y - range < p.y && y + range > p.y;
     }
 
 

@@ -1,8 +1,8 @@
-package core.physics.objects;
+package physics.objects;
 
-import core.physics.broadphase.AABB;
-import core.physics.shapes.Polygon2d;
-import core.physics.space.Vector2d;
+import physics.broadphase.AABB;
+import physics.shapes.Polygon2d;
+import physics.space.Vector2d;
 
 import java.util.InputMismatchException;
 
@@ -143,7 +143,7 @@ public class DynamicPolygon2d extends Polygon2d implements DynamicBody2d {
     @Override
     public AABB fitAABB() {
 
-        Vector2d[] points = getVertices();
+        /*Vector2d[] points = getVertices();
 
         float xMax = points[0].getX();
         float xMin = points[0].getX();
@@ -162,13 +162,27 @@ public class DynamicPolygon2d extends Polygon2d implements DynamicBody2d {
 
         Vector2d normal = Vector2d.normalize(velocity);
 
-        if (normal.x > 0) xMax += (normal.x * 50);
-        else xMin += (normal.x * 50);
+        if (normal.x > 0) {
+            xMax += (normal.x * 50);
+            xMin -= 20;
+        }
+        else {
+            xMin += (normal.x * 50);
+            xMax += 20;
+        }
 
-        if (normal.y > 0) yMax += (normal.y * 50);
-        else yMin += (normal.y * 50);
+        if (normal.y > 0) {
+            yMax += (normal.y * 50);
+            yMin -= 20;
+        }
+        else {
+            yMin += (normal.y * 50);
+            yMax += 20;
+        }
 
-        return new AABB(new Vector2d(xMin, yMin), new Vector2d(xMax, yMax));
+        return new AABB(new Vector2d(xMin, yMin), new Vector2d(xMax, yMax));*/
+
+        return AABB.fitBoundingBox(getVertices(), 30);
 
     }
 

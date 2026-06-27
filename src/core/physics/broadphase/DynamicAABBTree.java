@@ -1,14 +1,14 @@
-package core.physics.broadphase;
+package physics.broadphase;
 
-import core.physics.narrowphase.Collision;
-import core.physics.shapes.Shape2d;
-import core.physics.space.Vector2d;
-import core.util.Stack;
+import physics.narrowphase.Collision;
+import physics.shapes.Shape2d;
+import physics.space.Vector2d;
+import util.Stack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DynamicAABBTree {
+public class DynamicAABBTree extends BroadPhaseDetection{
 
     private AABBNode root;
 
@@ -52,7 +52,7 @@ public class DynamicAABBTree {
             node.collisionsIds.add(collisionId);
             result.collisionsIds.add(collisionId);
 
-            collisions.put(collisionId, new Collision((Shape2d) object, (Shape2d) result.object));
+            collisions.put(collisionId, new Collision((Shape2d) result.object, (Shape2d) object));
 
         }
         addLeaf(node);
@@ -183,7 +183,7 @@ public class DynamicAABBTree {
 
     }
 
-    public void removeLeaf(AABBLeaf leaf){
+    private void removeLeaf(AABBLeaf leaf){
 
         objects.remove(leaf.object.getId());
 

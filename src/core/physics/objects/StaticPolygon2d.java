@@ -1,8 +1,9 @@
-package core.physics.objects;
+package physics.objects;
 
-import core.physics.broadphase.AABB;
-import core.physics.shapes.Polygon2d;
-import core.physics.space.Vector2d;
+import managment.GameManager;
+import physics.broadphase.AABB;
+import physics.shapes.Polygon2d;
+import physics.space.Vector2d;
 
 public class StaticPolygon2d extends Polygon2d implements StaticBody2d {
 
@@ -12,8 +13,8 @@ public class StaticPolygon2d extends Polygon2d implements StaticBody2d {
         return restitution;
     }
 
-    public StaticPolygon2d(int id, Vector2d[] vertices) {
-        super(id, vertices);
+    public StaticPolygon2d(Vector2d[] vertices) {
+        super(GameManager.getId(), vertices);
     }
 
     @Override

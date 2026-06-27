@@ -1,6 +1,6 @@
-package core.physics.narrowphase;
+package physics.narrowphase;
 
-import core.physics.space.Vector2d;
+import physics.space.Vector2d;
 
 public interface NarrowPhaseDetection {
 

@@ -1,8 +1,8 @@
-package core.physics.narrowphase;
+package physics.narrowphase;
 
-import core.physics.shapes.Circle2d;
-import core.physics.shapes.Polygon2d;
-import core.physics.space.Vector2d;
+import physics.shapes.Circle2d;
+import physics.shapes.Polygon2d;
+import physics.space.Vector2d;
 
 public class PCNarrowPhaseDetection implements NarrowPhaseDetection {
 

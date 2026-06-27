@@ -1,4 +1,4 @@
-package core.physics.objects;
+package physics.objects;
 
 public interface KinematicBody2d extends DynamicBody2d {
 

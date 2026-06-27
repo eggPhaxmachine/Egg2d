@@ -1,13 +1,15 @@
-package core.physics;
+package physics;
 
-import core.managment.GameManager;
-import core.physics.broadphase.DynamicAABBTree;
-import core.physics.narrowphase.Collision;
-import core.physics.objects.DynamicBody2d;
-import core.physics.objects.RigidBody2d;
-import core.physics.objects.StaticBody2d;
-import core.physics.space.Vector2d;
-import core.managment.Environment;
+import managment.GameManager;
+import physics.broadphase.BroadPhaseDetection;
+import physics.broadphase.BruteForceDetection;
+import physics.broadphase.DynamicAABBTree;
+import physics.narrowphase.Collision;
+import physics.objects.DynamicBody2d;
+import physics.objects.RigidBody2d;
+import physics.objects.StaticBody2d;
+import physics.space.Vector2d;
+import managment.Environment;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -39,9 +41,9 @@ public class PhysicsEnvironment2d extends Environment {
 
     }
 
-    private final DynamicAABBTree broadPhase = new DynamicAABBTree();
+    private final BroadPhaseDetection broadPhase = new BruteForceDetection();
 
-    private Vector2d constant = new Vector2d(0, 0);// -100);
+    private Vector2d constant = new Vector2d(0, -300);
     public Vector2d getConstant() {
         return constant;
     }
@@ -49,7 +51,7 @@ public class PhysicsEnvironment2d extends Environment {
         this.constant = constant;
     }
 
-    private float resistance = 0.0f;
+    private float resistance = 0f;
     public float getResistance() {
         return resistance;
     }
@@ -77,6 +79,8 @@ public class PhysicsEnvironment2d extends Environment {
             object.rotate(angularVelocity * GameManager.getDeltaTime());
 
         }
+
+        broadPhase.update();
 
         Collision[] candidates = broadPhase.getCollisions();
 

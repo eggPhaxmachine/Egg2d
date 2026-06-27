@@ -1,11 +1,11 @@
-package core.physics.narrowphase;
+package physics.narrowphase;
 
-import core.physics.objects.DynamicBody2d;
-import core.physics.space.Vector2d;
+import physics.objects.DynamicBody2d;
+import physics.space.Vector2d;
 
 public class DDPhysicsResolution implements PhysicsResolution{
 
-    DynamicBody2d[] bodies;
+    protected final DynamicBody2d[] bodies;
 
 
     public DDPhysicsResolution(DynamicBody2d[] bodies) {

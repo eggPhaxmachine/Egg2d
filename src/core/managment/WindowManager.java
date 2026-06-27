@@ -1,7 +1,7 @@
-package core.managment;
+package managment;
 
-import core.rendering.shaders.ShaderCompileException;
-import core.rendering.shaders.ShaderUtils;
+import rendering.shaders.ShaderCompileException;
+import rendering.shaders.ShaderUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.*;
@@ -155,7 +155,7 @@ public class WindowManager {
             fragmentShaderId = ShaderUtils.compileShaders(settings.getFragmentShaderSource(), GL20.GL_FRAGMENT_SHADER);
         } catch (ShaderCompileException | IOException e){
             GL20.glDeleteShader(vertexShaderId);
-            System.out.println(e.getMessage() + "\nShaders unbound");
+            System.out.println(e.getMessage() + "Shaders unbound\n");
             return;
         }
 

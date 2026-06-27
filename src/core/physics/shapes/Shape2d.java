@@ -1,8 +1,8 @@
-package core.physics.shapes;
+package physics.shapes;
 
-import core.managment.GameObject;
-import core.physics.objects.RigidBody2d;
-import core.physics.space.Vector2d;
+import managment.GameObject;
+import physics.objects.RigidBody2d;
+import physics.space.Vector2d;
 
 public abstract class Shape2d extends GameObject implements RigidBody2d {
 

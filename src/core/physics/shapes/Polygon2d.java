@@ -1,6 +1,6 @@
-package core.physics.shapes;
+package physics.shapes;
 
-import core.physics.space.Vector2d;
+import physics.space.Vector2d;
 
 import java.util.InputMismatchException;
 
@@ -72,4 +72,7 @@ public abstract class Polygon2d extends Shape2d {
         return getVertices()[vertexID];
 
     }
+
+    public boolean flag = false;
+
 }

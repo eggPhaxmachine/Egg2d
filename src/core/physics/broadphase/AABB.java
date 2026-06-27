@@ -1,13 +1,12 @@
-package core.physics.broadphase;
+package physics.broadphase;
 
-import core.Tools;
-import core.physics.space.Vector2d;
+import physics.space.Vector2d;
 
 public class AABB {
 
-    private Vector2d minimumVertex;
+    private final Vector2d minimumVertex;
     public Vector2d getMinimumVertex() { return minimumVertex; }
-    private Vector2d maximumVertex;
+    private final Vector2d maximumVertex;
     public Vector2d getMaximumVertex() { return maximumVertex; }
 
 
@@ -49,10 +48,10 @@ public class AABB {
         Vector2d minimumVertex2 = object2.getMinimumVertex();
         Vector2d maximumVertex2 = object2.getMaximumVertex();
 
-        return ((Tools.between(minimumVertex1.getX(), minimumVertex2.getX(), maximumVertex2.getX()) ||
-                Tools.between(maximumVertex1.getX(), minimumVertex2.getX(), maximumVertex2.getX())) &&
-                (Tools.between(minimumVertex1.getY(), minimumVertex2.getY(), maximumVertex2.getY()) ||
-                Tools.between(maximumVertex1.getY(), minimumVertex2.getY(), maximumVertex2.getY())));
+        return ((between(minimumVertex1.getX(), minimumVertex2.getX(), maximumVertex2.getX()) ||
+                between(maximumVertex1.getX(), minimumVertex2.getX(), maximumVertex2.getX())) &&
+                (between(minimumVertex1.getY(), minimumVertex2.getY(), maximumVertex2.getY()) ||
+                between(maximumVertex1.getY(), minimumVertex2.getY(), maximumVertex2.getY())));
     }
 
     public static boolean AABBCheck(Vector2d[] object1, AABB object2) {
@@ -61,7 +60,7 @@ public class AABB {
         Vector2d maximumVertex2 = object2.getMaximumVertex();;
 
         for(Vector2d point : object1) {
-            if(!(Tools.between(point.getX(), minimumVertex2.getX(), maximumVertex2.getX()) && Tools.between(point.getY(), minimumVertex2.getY(), maximumVertex2.getY()))){
+            if(!(point.x <= maximumVertex2.x && point.x >= minimumVertex2.x && point.y <= maximumVertex2.y && point.y >= minimumVertex2.y)){
                 return false;
             }
         }
@@ -98,6 +97,12 @@ public class AABB {
         }
 
         return new AABB(new Vector2d(minX - fattening, minY - fattening), new Vector2d(maxX + fattening, maxY + fattening));
+    }
+
+    public static boolean between(double value, double min, double max) {
+
+        return value >= min && value <= max;
 
     }
+    
 }

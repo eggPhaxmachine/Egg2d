@@ -1,4 +1,4 @@
-package core.util;
+package util;
 
 public class Stack<V> {
 

@@ -1,4 +1,4 @@
-package core.managment;
+package managment;
 
 public abstract class Environment {
 
